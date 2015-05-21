@@ -14,14 +14,19 @@ app.get('/:domain', function(req, res) {
       absoluteImageName = __dirname + '/' + imageName;
 
   var imageLoaded = function(err){
-    res.sendFile(absoluteImageName);
+    if(err){
+      console.log(err)
+      res.sendFile('error.png', {root: __dirname + '/images'})
+    } else {
+      res.sendFile(absoluteImageName);
+    }
   }
 
   fs.exists(absoluteImageName, function (exists) {
     if(exists){
       imageLoaded(null)
     } else {
-      webshot(req.params.domain, imageName, imageLoaded);
+      webshot(req.params.domain, imageName, {timeout: 15000}, imageLoaded);
     }
   });
 
