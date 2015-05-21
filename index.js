@@ -10,13 +10,14 @@ var config = {
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/:domain', function(req, res) {
 
-  var imageName = config.imagesDir + '/' + req.params.domain + '.png';
+  var imageName = config.imagesDir + '/' + req.params.domain + '.png',
+      absoluteImageName = __dirname + '/' + imageName;
 
   var imageLoaded = function(err){
-    res.sendFile(req.params.domain + '.png', {root: __dirname + '/' + config.imagesDir});
+    res.sendFile(absoluteImageName);
   }
 
-  fs.exists(__dirname + '/' + imageName, function (exists) {
+  fs.exists(absoluteImageName, function (exists) {
     if(exists){
       imageLoaded(null)
     } else {
@@ -32,6 +33,6 @@ var server = app.listen(3003, function () {
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Webshot app listening at http://%s:%s', host, port);
 
 });
