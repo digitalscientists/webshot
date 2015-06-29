@@ -7,6 +7,8 @@ var config = {
   imagesDir: 'images'
 };
 
+var customCSS = '#rately_top_bar,#rately_stage,#rately_visits{display: none !important;}'
+
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/:domain', function(req, res) {
 
@@ -26,7 +28,13 @@ app.get('/:domain', function(req, res) {
     if(exists){
       imageLoaded(null)
     } else {
-      webshot(req.params.domain, imageName, {timeout: 15000}, imageLoaded);
+      webshot(req.params.domain, imageName, {
+        timeout: 15000, 
+        customCSS: customCSS,
+        settings: {
+          javascriptEnabled: false
+        }
+      }, imageLoaded);
     }
   });
 
