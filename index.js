@@ -7,7 +7,9 @@ var config = {
   imagesDir: 'images'
 };
 
-var customCSS = '#rately_top_bar,#rately_stage,#rately_visits{display: none !important;}'
+var customCSS = '#rately_top_bar,#rately_stage,#rately_visits,\
+  .targetgenius__header-bar,.targetgenius__footer-bar,.targetgenius__modal \
+  {display: none !important;}';
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/:domain', function(req, res) {
